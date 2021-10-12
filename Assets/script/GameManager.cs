@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
 	public GameObject block4;
 	public GameObject block5;
 
+	//audio source
+	//public AudioSource mySfx;
+	//public AudioClip bgm;
+	//public AudioClip BGM;
 
 	#region Singleton class: GameManager
 
@@ -75,6 +79,9 @@ public class GameManager : MonoBehaviour
 	//---------------------------------------
 	void Start()
 	{
+
+		//bgm
+		//Bgm();
 
 		Debug.Log("startfunction");
 		cam = Camera.main;
@@ -288,5 +295,13 @@ public class GameManager : MonoBehaviour
 	{
 		SceneManager.LoadScene("Game");
 	}
+
+	//BGM
+
+	//public void Bgm()
+  //  {
+	//	mySfx.PlayOneShot(bgm);
+   // }
+
 
 }

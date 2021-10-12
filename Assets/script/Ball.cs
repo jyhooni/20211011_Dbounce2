@@ -19,7 +19,16 @@ public class Ball : MonoBehaviour
 	
 	public Text highScoreText;
 	public Text highCoinText;
+
+	//sound
 	
+	public AudioSource mySfx;
+	public AudioClip getcoin;
+	public AudioClip goalin;
+	public AudioClip heatwall;
+
+	
+
 
 
 	[HideInInspector] public Rigidbody2D rb;
@@ -92,6 +101,24 @@ public class Ball : MonoBehaviour
 
 
 
+	//sound function
+	public void Getcoinsound()
+    {
+		mySfx.PlayOneShot(getcoin);
+    }
+
+	public void shotgoal()
+	{
+		mySfx.PlayOneShot(goalin);
+	}
+
+	public void hitwall()
+	{
+		mySfx.PlayOneShot(heatwall);
+	}
+
+
+
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		//if (other.transform.tag == "block2")
@@ -109,6 +136,7 @@ public class Ball : MonoBehaviour
 			Coin++;
 			textCoins.text = "Coin :" + Coin.ToString();
 
+			Getcoinsound();
 			//if (Coin > hiCoinCount)
 			//	{
 			hiCoinCount ++;
@@ -123,7 +151,7 @@ public class Ball : MonoBehaviour
 		
 		if (other.transform.tag == "SC")
 		{
-			
+			shotgoal();
 			//ScoreCount++;
 			ScoreCount += 2;
 			
@@ -167,12 +195,22 @@ public class Ball : MonoBehaviour
 		//양쪽 벽에 부딛혔을때 핸드폰 진동 울리는 함수
 		if (colli.transform.tag == "wall")
 		{
-			Handheld.Vibrate();
-			Debug.Log("vibration");
+			
+			int call = PlayerPrefs.GetInt("vibmuted");
+			if (call == 0)
+			{
+				Debug.Log("vib");
+				vib();
+			}
 
 		}
 	}
 
+	public void vib()
+	{
+		Handheld.Vibrate();
+		Debug.Log("vibration");
+	}
 
     //end coin managing-------------------------------
 
